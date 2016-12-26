@@ -3,6 +3,7 @@
 Public IncrementoLetra As Integer = 20
 Public IncrementoMarcador As Integer = 10
 Public ChinchetaRuta As String = "chinchetas/01.png"
+Public PreguntarBorrado As String
 
 Public distancia As Integer = 40
 

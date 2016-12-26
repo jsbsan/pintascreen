@@ -8,3 +8,16 @@
 
 #archivo ejecutable .gambas
 *.gambas
+#---- Gambas files to ignore (v1)
+*.gambas
+.lock
+*~
+core
+core.*
+vgcore
+vgcore.*
+.kdbg*
+.*.prof
+.lang/*.pot
+.gambas/*
+#----

@@ -22,7 +22,7 @@ Public Sub Form_Open()
   ModuleAbrirGuardar.cargaArchivos(ListBoxFicheros, ButtonBoxDirectorioAbrir.text)
   PictureBoxPrevisualizacion.Picture = Picture["fondo.png"]
   buttonBoxSeleccioneRutaGuardar.text = Settings["RutaGuardarArchivo", User.home]
-
+  ComboBoxPreguntarBorrado.text = Settings["PreguntarBorrado", "Si"]
   Me.center
 
 End
@@ -38,8 +38,10 @@ Public Sub ButtonAceptar_Click()
   Settings["ReinicioContador"] = CheckBoxReinicioContador.value
   Settings["TamanoLetraNumerador"] = SpinBoxTamanoLetraNumerador.value
   Settings["DiametroNumerador"] = SpinBoxDiametroNumerador.Value
+  Settings["PreguntarBorrado"] = ComboBoxPreguntarBorrado.text
+  ModuleComun.PreguntarBorrado = ComboBoxPreguntarBorrado.text
+  'guardo las variables
   Settings.Save()
-
   Me.close
 
 End

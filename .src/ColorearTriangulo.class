@@ -3,6 +3,7 @@
 'convert test.svg test.png
 Private imagenExistente As Image
 Private Valorcolor As Integer
+Public nombreTrianguloSVG As String = "triangulo1.svg"
 
 Public Function lee(valor As Integer) As Image
 
@@ -34,7 +35,7 @@ Private Function coloreaTriangulo(valor As Integer) As Image
     'lo tengo que crear
 
     Try Kill "/tmp/triangulo.svg"
-    Try Copy "triangulo.svg" To "/tmp/triangulo.svg"
+    Try Copy nombreTrianguloSVG To "/tmp/triangulo.svg"
     contenido = File.Load("/tmp/triangulo.svg")
 
     contenido = Replace(contenido, "fill:#ff0000;", "fill:#" & Hex(valor) & ";")

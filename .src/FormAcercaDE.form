@@ -1,15 +1,15 @@
 # Gambas Form File 3.0
 
 { Form Form
-  MoveScaled(0,0,92,70)
+  MoveScaled(0,0,92,74)
   Icon = Picture["pintaScreen.png"]
   Border = False
   { Panel1 Panel
-    MoveScaled(0,-1,92,71)
+    MoveScaled(0,-1,92,75)
     Background = &H3F9FFF&
   }
   { ButtonAceptar Button
-    MoveScaled(52,64,38,5)
+    MoveScaled(51,68,38,5)
     Text = ("Aceptar y Salir de configuración")
     Picture = Picture["icon:/22/apply"]
   }
@@ -18,9 +18,9 @@
     Text = ("Icono Chincheta (elija el icono de carpeta para elegir imagen):")
   }
   { ScrollView1 ScrollView
-    MoveScaled(2,52,87,11)
+    MoveScaled(2,55,87,13)
     { VBox1 HBox
-      MoveScaled(0,0,84,8)
+      MoveScaled(0,0,85,9)
       Expand = True
     }
   }
@@ -40,7 +40,7 @@
     { TextLabel1 TextLabel
       MoveScaled(12,8,38,6)
       Font = Font["Qlumpy Shadow BRK,Italic,+5"]
-      Text = ("Acerca de...")
+      Text = ("Acerca de") & "..."
       Alignment = Align.Center
     }
     { TextLabel2 TextLabel
@@ -110,20 +110,30 @@
     Text = ("Letra y Subrayado")
     Picture = Picture["icon:/16/text-strike"]
     { Label2 Label
-      MoveScaled(6,12,20,4)
+      MoveScaled(6,8,20,4)
       Text = ("Ancho Letra:")
       Alignment = Align.Right
     }
     { SpinBoxLetra SpinBox
-      MoveScaled(26,12,8,4)
+      MoveScaled(27,8,8,4)
     }
     { Label3 Label
-      MoveScaled(5,17,21,4)
+      MoveScaled(5,15,21,4)
       Text = ("Ancho Subrayador:")
       Alignment = Align.Right
     }
     { SpinBoxSubrayador SpinBox
-      MoveScaled(26,17,8,4)
+      MoveScaled(27,15,8,4)
+    }
+    { Label11 Label
+      MoveScaled(2,23,24,3)
+      Text = ("Borrar todo ¿preguntar?:")
+      Alignment = Align.Right
+    }
+    { ComboBoxPreguntarBorrado ComboBox
+      MoveScaled(27,22,10,4)
+      ReadOnly = True
+      List = [("Si"), ("No")]
     }
     Index = 3
     Text = ("Numerador")
@@ -207,7 +217,7 @@
     Index = 0
   }
   { HPanelBocadillos HPanel
-    MoveScaled(2,31,87,21)
+    MoveScaled(2,34,87,21)
     Visible = False
     Background = &H9FCFFF&
   }

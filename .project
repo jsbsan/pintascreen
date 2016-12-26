@@ -3,7 +3,7 @@
 Title=pintaScreen
 Startup=Mmain
 Icon=pintaScreen.png
-Version=0.0.73
+Version=0.0.74
 Component=gb.image
 Component=gb.gui.qt
 Component=gb.form

@@ -81,6 +81,8 @@ Public WebcamRediY As Integer
 
 Private tmpImagen As Image
 
+Private PreguntarBorrado As String = "Si" ''borrado de todo: preguntar o no si se desea hacer
+
 Public Sub _new()
 
 End
@@ -156,6 +158,8 @@ Public Sub Form_Open()
   'herramienta numerador (tamaño del circulo y letra)
   TamanoLetraNumerador = Settings["TamanoLetraNumerador", 11]
   diametro = Settings["DiametroNumerador", 25]
+
+  modulecomun.PreguntarBorrado = Settings["PreguntarBorrado", "Si"]
 
 End
 
@@ -263,6 +267,15 @@ Public Sub PulsadoUnaTecla(teclapulsada As Integer)
       '-----------------------------------
       'cambio de teclas....
     Case 16777223 'tecla suprimir....
+      If modulecomun.PreguntarBorrado = "No" Then
+        'borrar sin preguntar
+        dibujoAnterior = dibuja
+        dibuja = "borrado"
+        ContandorNumerador = 0
+        DrawingArea1.Refresh()
+        Return
+      Endif
+
       resp = Message.Question(("¿realmente desea borrar todo lo dibujado?"), ("Si, Borralo"), ("No, cancela la orden"))
       If resp = 1 Then
         dibujoAnterior = dibuja
@@ -729,12 +742,6 @@ Public Sub DrawingArea1_Draw()
       'version 0.0.74
     Case "fondodinamico2pantallas"
       PictureBoxFondo.picture = Desktop.Screenshot(Desktop.Screenshot().w / 2, 0, Desktop.Screenshot().w / 2, Desktop.Screenshot().h)
-
-
-
-
-
-
 
     Case "cuadricula"
 
