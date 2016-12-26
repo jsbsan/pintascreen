@@ -1,0 +1,10 @@
+#ignorar este directorio
+
+.gambas/*
+.gambas/
+
+#archivos temporales
+*~
+
+#archivo ejecutable .gambas
+*.gambas
