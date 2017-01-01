@@ -165,7 +165,7 @@ Public Sub TomarFotoParcial(x1 As Integer, y1 As Integer, x2 As Integer, y2 As I
 
   p = Desktop.Screenshot(x1, y1, x2 - x1, y2 - y1)
 
-  Dialog.Filter = ["*.png", "png", "*.jpg", "jpg"]
+  Dialog.Filter = ["*.jpg", "jpg", "*.png", "png"]
   'presentar dialog para guardar nombre
   If Dialog.SaveFile() Then
     'lo guardao en el portapapeles...
@@ -174,7 +174,7 @@ Public Sub TomarFotoParcial(x1 As Integer, y1 As Integer, x2 As Integer, y2 As I
     fmensaje.mostrar(("Imagen guardada en el portapapeles"))
   Else
 
-    If File.Ext(Dialog.path) = "" Then Dialog.path &= ".png"
+    If File.Ext(Dialog.path) = "" Then Dialog.path &= ".jpg" ' por defecto se guardan en formato jpg (mejor para internet, mas pequeños)
     Try Kill Dialog.Path 'borrado preventivo si existe un archivo con nombre similar, version 0.31
     p.Save(Dialog.Path)
 
