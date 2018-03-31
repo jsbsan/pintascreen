@@ -19,7 +19,7 @@ Public Sub cargaImagen(Rutafichero As String) As Picture
   'leer el archivo, lo descomprime, y carga la vista minuatura...
   Try Kill user.home & "/.config/pintascreen/mini.jpg"
 
-  Shell "cd /tmp;tar -zxvf \"" & Rutafichero & "\" mini.jpg" Wait
+  Shell "cd " & User.home & "/.config/pintascreen" & ";tar -zxvf \"" & Rutafichero & "\" mini.jpg" Wait
 
   If Exist(user.home & "/.config/pintascreen/mini.jpg") Then
     Return Picture.Load(user.home & "/.config/pintascreen/mini.jpg")
@@ -39,6 +39,7 @@ Public Sub abrir(Rutafichero As String, listaDibujos As Dibujo[])
   'copiamos el archivo y lo descomprimimos
   If Not Exist(user.home & "/.config/pintascreen/pintascreenAbrir") Then
     Mkdir user.home & "/.config/pintascreen/pintascreenAbrir"
+    Wait 0.05
   Endif
 
   'borrar archivos existentes
@@ -48,7 +49,7 @@ Public Sub abrir(Rutafichero As String, listaDibujos As Dibujo[])
 
   'copia el archivo y lo descomprime el archivo
   Copy Rutafichero To user.home & "/.config/pintascreen/pintascreenAbrir/" & File.Name(Rutafichero)
-  Shell "cd " & user.home & "/.config/pintascreen/pintascreenAbrir/;tar -zxvf \"" & user.home & "/.config/pintascreen/pintascreenAbrir/" & File.Name(Rutafichero) & " \"" Wait
+  Shell "cd " & user.home & "/.config/pintascreen/pintascreenAbrir/;tar -zxvf \"" & user.home & "/.config/pintascreen/pintascreenAbrir/" & File.Name(Rutafichero) & "\"" Wait
 
   'copiar fondo
   Try Kill user.home & "/.config/pintascreen/fondo.jpg"
@@ -121,10 +122,10 @@ Public Sub guardar(rutafichero As String, listaDibujos As Dibujo[])
   File.Save(user.home & "/.config/pintascreen/pintascreenGuarda/figuras.txt", contenido)
   'crear el comprimido
   '
-  comando = "cd /home/" & user.home & "/.config/pintascreen/pintascreenGuarda/;tar czvf \"" & File.Name(rutafichero) & ".tar.gz\" *"
+  comando = "cd " & user.home & "/.config/pintascreen/pintascreenGuarda/;tar czvf \"" & File.Name(rutafichero) & ".tar.gz\" *"
 
   Shell comando Wait
-  comando = "mv /home/" & user.home & "/.config/pintascreen/pintascreenGuarda/" & File.Name(rutafichero) & ".tar.gz " & Rutafichero & ".pintascreen"
+  comando = "mv " & user.home & "/.config/pintascreen/pintascreenGuarda/" & File.Name(rutafichero) & ".tar.gz " & Rutafichero & ".pintascreen"
   Shell comando Wait
 
   'borrar todos los archivos del escritorio de trabajo...

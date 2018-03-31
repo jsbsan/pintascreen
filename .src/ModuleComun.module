@@ -91,7 +91,7 @@ Public Function coloreaTriangulo(valor As Integer) As Image
 
   File.Save(user.home & "/.config/pintascreen/trianguloColoreado.svg", contenido)
   Try Kill user.home & "/.config/pintascreen/tri.png"
-  Shell "convert /home/" & user.home & "/.config/pintascreen/trianguloColoreado.svg /home/" & user.home & "/.config/pintascreen/tri.png" Wait
+  Shell "convert " & user.home & "/.config/pintascreen/trianguloColoreado.svg " & user.home & "/.config/pintascreen/tri.png" Wait
 
   i = Image.Load(user.home & "/.config/pintascreen/tri.png")
   Return i
@@ -128,7 +128,7 @@ Public Sub EmborronarTomarFotoParcial(x1 As Integer, y1 As Integer, x2 As Intege
   p.Save(user.home & "/.config/pintascreen/emborronarA" & numeracion & ".jpg")
   'hago conversion...
   Wait 0.1
-  Shell "convert /home/" & user.home & "/.config/pintascreen/emborronarA" & numeracion & ".jpg -blur 0x3 /home/" & user.home & "/.config/pintascreen/emborronar" & numeracion & ".jpg"
+  Shell "convert " & user.home & "/.config/pintascreen/emborronarA" & numeracion & ".jpg -blur 0x3 " & user.home & "/.config/pintascreen/emborronar" & numeracion & ".jpg"
   While Not Exist(user.home & "/.config/pintascreen/emborronar" & numeracion & ".jpg")
     Wait 0.1
     'esperar hasta que no se cree el archivo

@@ -237,7 +237,7 @@ Path="pintaScreen.gambas"
 
 [OpenFile]
 File[1]=".src/FMain.form"
-Active=44
+Active=2
 File[2]=".src/FMain.class:0.105"
 File[3]=".src/rectangulo.class:19.33"
 File[4]=".src/RectPunteado.class:19.0"

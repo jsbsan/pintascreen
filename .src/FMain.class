@@ -201,7 +201,7 @@ Public Sub PulsadoUnaTecla(teclapulsada As Integer)
 
   Select Case teclapulsada
     Case 79 'tecla o: toma captura 2 area de escritorio
-      Shell "wmctrl -s 1;scrot /home/" & user.home & "/.config/pintascreen/fondo.jpg -q 100" Wait
+      Shell "wmctrl -s 1;scrot " & user.home & "/.config/pintascreen/fondo.jpg -q 100" Wait
       PictureBoxFondo.Picture = Picture.Load(user.home & "/.config/pintascreen/fondo.jpg")
       Shell "wmctrl -s 0"
     Case 78 'Tecla N: numerador...
@@ -1027,12 +1027,12 @@ Public Sub ToolButtonConfigurar_Click()
   Endif
 
   'conversion con "convert" (hace falta tener instalado "rsvg-convert"
-  comando = "convert /home/" & user.home & "/.config/pintascreen/" & nombrearchivo & " -resize 32x32 /home/" & user.home & "/.config/pintascreen/mini.png"
+  comando = "convert " & user.home & "/.config/pintascreen/" & nombrearchivo & " -resize 32x32 " & user.home & "/.config/pintascreen/mini.png"
   Shell comando Wait
 
   If Not Exist("tmp/mini.png") And InStr(nombrearchivo, ".svg") <> 0 Then
     'intento hacer conversion con inkscape
-    comando = "inkscape -z -e /home/" & user.home & "/.config/pintascreen/mini.png -w 32 -h 32 " & user.home & "/.config/pintascreen/" & nombrearchivo
+    comando = "inkscape -z -e " & user.home & "/.config/pintascreen/mini.png -w 32 -h 32 " & user.home & "/.config/pintascreen/" & nombrearchivo
     Shell comando To salidacomando
 
   Endif
@@ -1368,14 +1368,14 @@ Public Sub ToolButtonFondo_Click()
         Select Case datos[3]
           Case "Escalar"
             ''caso 1º de adaptar imagen a extensión de pantalla, escanlando tanto vertical como horizontal
-            c = "convert " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " -resize " & Str$(screen.w) & "x" & Str$(screen.h) & "! /home/" & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
+            c = "convert " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " -resize " & Str$(screen.w) & "x" & Str$(screen.h) & "! " & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
             ' Print "comando: ", c
             Shell c Wait
 
           Case "SinEscalar"
             'pongo un fondo gris y encima la imagen sin encalar en el centro.
             CompruebaFondoGris()
-            c = "composite -gravity center " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " /home/" & user.home & "/.config/pintascreen/gristmp2.png" & " /home/" & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
+            c = "composite -gravity center " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " " & user.home & "/.config/pintascreen/gristmp2.png" & " " & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
             Shell c Wait
 
           Case "Horizontal"
@@ -1392,10 +1392,10 @@ Public Sub ToolButtonFondo_Click()
             alto = Val(Mid(dimensiones, InStr(dimensiones, "x") + 1, Len(dimensiones)))
 
             '1º convierto la imagen
-            c = "convert " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " -resize " & Str$(screen.w) & "x" & Str$(Int(screen.w / (ancho) * (alto))) & "! /home/" & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2])
+            c = "convert " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " -resize " & Str$(screen.w) & "x" & Str$(Int(screen.w / (ancho) * (alto))) & "! " & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2])
             Shell c Wait
             '2º la pongo encima del fondo
-            c = "composite -gravity center " & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2]) & " /home/" & user.home & "/.config/pintascreen/gristmp2.png" & " /home/" & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
+            c = "composite -gravity center " & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2]) & " " & user.home & "/.config/pintascreen/gristmp2.png" & " " & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
             Shell c Wait
 
           Case "Vertical"
@@ -1410,11 +1410,11 @@ Public Sub ToolButtonFondo_Click()
             alto = Val(Mid(dimensiones, InStr(dimensiones, "x") + 1, Len(dimensiones)))
 
             '1º convierto la imagen
-            c = "convert " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " -resize " & Str$(Int(Screen.h * ancho / alto)) & "x" & Str$(Screen.h) & "! /home/" & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2])
+            c = "convert " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " -resize " & Str$(Int(Screen.h * ancho / alto)) & "x" & Str$(Screen.h) & "! " & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2])
             Shell c Wait
 
             '2º la pongo encima del fondo
-            c = "composite -gravity center " & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2]) & " /home/" & user.home & "/.config/pintascreen/gristmp2.png" & " /home/" & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
+            c = "composite -gravity center " & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2]) & " " & user.home & "/.config/pintascreen/gristmp2.png" & " " & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
             Shell c Wait
 
         End Select
@@ -1435,7 +1435,7 @@ Private Sub CompruebaFondoGris()
   If Not Exist(user.home & "/.config/pintascreen/gris2.png") Then
     Try Copy "gris.png" To user.home & "/.config/pintascreen/gristmp.png"
     Wait 0.05
-    c = "convert " & user.home & "/.config/pintascreen/gristmp.png" & " -resize " & Str$(screen.w) & "x" & Str$(screen.h) & "! /home/" & user.home & "/.config/pintascreen/gristmp2.png"
+    c = "convert " & user.home & "/.config/pintascreen/gristmp.png" & " -resize " & Str$(screen.w) & "x" & Str$(screen.h) & "! " & user.home & "/.config/pintascreen/gristmp2.png"
     ' Print "comando: ", c
     Shell c Wait
   Endif

@@ -42,7 +42,7 @@ Private Function coloreaTriangulo(valor As Integer) As Image
 
     File.Save(user.home & "/.config/pintascreen/trianguloColoreado.svg", contenido)
     Try Kill user.home & "/.config/pintascreen/tri.png"
-    Shell "convert /home/" & user.home & "/.config/pintascreen/trianguloColoreado.svg /home/" & user.home & "/.config/pintascreen/tri" & Hex(valor) & ".png" Wait
+    Shell "convert " & user.home & "/.config/pintascreen/trianguloColoreado.svg " & user.home & "/.config/pintascreen/tri" & Hex(valor) & ".png" Wait
 
     If Exist(user.home & "/.config/pintascreen/tri" & Hex(valor) & ".png") Then
       i = Image.Load(user.home & "/.config/pintascreen/tri" & Hex(valor) & ".png")
