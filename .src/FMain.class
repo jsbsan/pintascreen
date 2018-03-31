@@ -98,19 +98,27 @@ Public Sub Form_Open()
   ToolButtonParadaStop.tag = "parado"
   TimerCambioCursorNormal()
 
-  Try Copy "blanco.png" To "/tmp/blanco.png"
-  Try Copy "triangulo.png" To "/tmp/triangulo.png"
+  If Not Exist(user.home & "/.config/pintascreen/") Then
+    Try Mkdir user.home & "/.config"
+    Wait 0.05
+    Mkdir user.home & "/.config/pintascreen/"
+    Try 0.05 '
+
+  Endif
+
+  Try Copy "blanco.png" To user.home & "/.config/pintascreen/blanco.png"
+  Try Copy "triangulo.png" To user.home & "/.config/pintascreen/triangulo.png"
 
   If espera = True Then
     Wait 1 'espero 1 segundo para que de tiempo a quitarse el menu
   Endif
 
-  'Shell "mkdir -p /tmp/$USER/"
+  'Shell "mkdir -p /home/" & user.home & "/.config/pintascreen/$USER/"
 
-  'Shell "DISPLAY=:0 scrot /tmp/$USER/fondo.jpg -q 100" Wait
-  '  Shell "DISPLAY=:0 scrot /tmp/fondo.jpg -q 100" Wait
+  'Shell "DISPLAY=:0 scrot /home/" & user.home & "/.config/pintascreen/$USER/fondo.jpg -q 100" Wait
+  '  Shell "DISPLAY=:0 scrot /home/" & user.home & "/.config/pintascreen/fondo.jpg -q 100" Wait
 
-  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save("/tmp/fondo.jpg", 100)
+  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save(user.home & "/.config/pintascreen/fondo.jpg", 100)
 
   Me.X = 0
   Me.Y = 0
@@ -123,15 +131,15 @@ Public Sub Form_Open()
 
   Me.w = Screen.Width
   Me.h = Screen.H
-  'Me.Picture = Picture.Load("/tmp/" & User.Name & "/fondo.jpg")
-  Me.Picture = Picture.Load("/tmp/fondo.jpg")
+  'Me.Picture = Picture.Load( user.home & "/.config/pintascreen/" & User.Name & "/fondo.jpg")
+  Me.Picture = Picture.Load(user.home & "/.config/pintascreen/fondo.jpg")
   PictureBoxFondo.w = Screen.w
   PictureBoxFondo.h = Screen.h
 
-  'PictureBoxFondo.Picture = Picture.Load("/tmp/" & User.Name & "/fondo.jpg")
+  'PictureBoxFondo.Picture = Picture.Load( user.home & "/.config/pintascreen/" & User.Name & "/fondo.jpg")
 
-  'RutaImagenfondo = "/tmp/" & User.Name & "/fondo.jpg"
-  RutaImagenfondo = "/tmp/fondo.jpg"
+  'RutaImagenfondo =  user.home & "/.config/pintascreen/" & User.Name & "/fondo.jpg"
+  RutaImagenfondo = user.home & "/.config/pintascreen/fondo.jpg"
   VBox1.x = Screen.w - VBox1.W - 30
   VBox1.y = Screen.h / 2 - VBox1.h / 2
   VBox1.h = Screen.h
@@ -193,8 +201,8 @@ Public Sub PulsadoUnaTecla(teclapulsada As Integer)
 
   Select Case teclapulsada
     Case 79 'tecla o: toma captura 2 area de escritorio
-      Shell "wmctrl -s 1;scrot /tmp/fondo.jpg -q 100" Wait
-      PictureBoxFondo.Picture = Picture.Load("/tmp/fondo.jpg")
+      Shell "wmctrl -s 1;scrot /home/" & user.home & "/.config/pintascreen/fondo.jpg -q 100" Wait
+      PictureBoxFondo.Picture = Picture.Load(user.home & "/.config/pintascreen/fondo.jpg")
       Shell "wmctrl -s 0"
     Case 78 'Tecla N: numerador...
       dibuja = "Numerador"
@@ -375,7 +383,8 @@ Public Sub DrawingArea1_MouseDown()
         ColorButtonColorBotonTexto.Value = ColorButtonLineas.value
       Endif
       FrameTexto.visible = True
-      FrameTexto.SetFocus()
+      'colocar cursor en textarea
+      FrameTexto.Children[4].SetFocus() 'foco en el elmento 4 del frame que es el textarea
       Return
     Endif
 
@@ -510,7 +519,6 @@ Public Sub DrawingArea1_MouseDown()
         'no hago nada
         dibuja = ""
       Else
-        ''TODO: nota o comentario: mostrar propiedades del objeto seleccionado....
         dibujoDesplazamiento.mostrarPropiedades()
         dibuja = ""
         DrawingArea1.Refresh()
@@ -976,17 +984,17 @@ Public Sub ToolButtonTomarFoto_Click()
   VBox1.visible = False
   Wait 0.1
   'caputar
-  'Shell "DISPLAY=:0 scrot /tmp/$USER/fondoCaptura.png -q 100" Wait
-  'Shell "DISPLAY=:0 scrot /tmp/fondoCaptura.png -q 100" Wait
-  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save("/tmp/fondoCaptura.png", 100)
+  'Shell "DISPLAY=:0 scrot /home/" & user.home & "/.config/pintascreen/$USER/fondoCaptura.png -q 100" Wait
+  'Shell "DISPLAY=:0 scrot /home/" & user.home & "/.config/pintascreen/fondoCaptura.png -q 100" Wait
+  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save(user.home & "/.config/pintascreen/fondoCaptura.png", 100)
   Dialog.Filter = ["*.png", "png"]
   'presentar dialog para guardar nombre
   If Dialog.SaveFile() Then
   Else
     If File.Ext(Dialog.path) <> "png" Then Dialog.path &= ".png"
     Try Kill Dialog.Path 'borrado preventivo si existe un archivo con nombre similar, version 0.31
-    ' Copy "/tmp/" & User.Name & "/fondoCaptura.png" To Dialog.Path
-    Copy "/tmp/fondoCaptura.png" To Dialog.Path
+    ' Copy  user.home & "/.config/pintascreen/" & User.Name & "/fondoCaptura.png" To Dialog.Path
+    Copy user.home & "/.config/pintascreen/fondoCaptura.png" To Dialog.Path
   Endif
   Wait 0.1
   VBox1.visible = True
@@ -1009,28 +1017,28 @@ Public Sub ToolButtonConfigurar_Click()
   FormAcercaDE.listaFiguras = figuras
   FormAcercaDE.ShowModal()
   ' recordatorio...covertir a miniatura...
-  Try Kill "/tmp/mini.png"
+  Try Kill user.home & "/.config/pintascreen/mini.png"
   nombrearchivo = Replace$(File.Name(ModuleComun.ChinchetaRuta), " ", "_")
 
   If Mid$(modulecomun.ChinchetaRuta, 1, 10) = "chinchetas" Then
-    Try Copy ModuleComun.ChinchetaRuta To "/tmp/" & nombrearchivo
+    Try Copy ModuleComun.ChinchetaRuta To user.home & "/.config/pintascreen/" & nombrearchivo
   Else
-    Try Copy ModuleComun.ChinchetaRuta To "/tmp/" & nombrearchivo
+    Try Copy ModuleComun.ChinchetaRuta To user.home & "/.config/pintascreen/" & nombrearchivo
   Endif
 
   'conversion con "convert" (hace falta tener instalado "rsvg-convert"
-  comando = "convert /tmp/" & nombrearchivo & " -resize 32x32 /tmp/mini.png"
+  comando = "convert /home/" & user.home & "/.config/pintascreen/" & nombrearchivo & " -resize 32x32 /home/" & user.home & "/.config/pintascreen/mini.png"
   Shell comando Wait
 
   If Not Exist("tmp/mini.png") And InStr(nombrearchivo, ".svg") <> 0 Then
     'intento hacer conversion con inkscape
-    comando = "inkscape -z -e /tmp/mini.png -w 32 -h 32 " & "/tmp/" & nombrearchivo
+    comando = "inkscape -z -e /home/" & user.home & "/.config/pintascreen/mini.png -w 32 -h 32 " & user.home & "/.config/pintascreen/" & nombrearchivo
     Shell comando To salidacomando
 
   Endif
 
-  If Exist("/tmp/mini.png") Then
-    ToolButtonChincheta.Picture = Picture.load("/tmp/mini.png")
+  If Exist(user.home & "/.config/pintascreen/mini.png") Then
+    ToolButtonChincheta.Picture = Picture.load(user.home & "/.config/pintascreen/mini.png")
   Else
     'no he podido crear la imagen pequeña... cargo la imagen...
     Try ToolButtonChincheta.Picture = Picture.load(ModuleComun.ChinchetaRuta)
@@ -1096,11 +1104,11 @@ Public Sub cargafondo()
 
   Wait 1 'espero 1 segundo para que de tiempo a quitarse el menu
 
-  'Shell "mkdir -p /tmp/$USER/"
+  'Shell "mkdir -p /home/" & user.home & "/.config/pintascreen/$USER/"
 
-  'Shell "DISPLAY=:0 scrot /tmp/$USER/fondo.jpg -q 100" Wait
-  'Shell "DISPLAY=:0 scrot /tmp/fondo.jpg -q 100" Wait
-  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save("/tmp/fondo.jpg", 100)
+  'Shell "DISPLAY=:0 scrot /home/" & user.home & "/.config/pintascreen/$USER/fondo.jpg -q 100" Wait
+  'Shell "DISPLAY=:0 scrot /home/" & user.home & "/.config/pintascreen/fondo.jpg -q 100" Wait
+  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save(user.home & "/.config/pintascreen/fondo.jpg", 100)
   Me.X = 0
   Me.Y = 0
   Me.Border = False
@@ -1112,8 +1120,8 @@ Public Sub cargafondo()
 
   Me.w = Screen.Width
   Me.h = Screen.H
-  'PictureBoxFondo.Picture = Picture.Load("/tmp/" & User.Name & "/fondo.jpg")
-  PictureBoxFondo.Picture = Picture.Load("/tmp/fondo.jpg")
+  'PictureBoxFondo.Picture = Picture.Load( user.home & "/.config/pintascreen/" & User.Name & "/fondo.jpg")
+  PictureBoxFondo.Picture = Picture.Load(user.home & "/.config/pintascreen/fondo.jpg")
   VBox1.x = Screen.w - VBox1.W
   VBox1.y = Screen.h / 2 - VBox1.h / 2
   ToolButtonVentanas.tag = "Vertical" 'estado de la barra de botones
@@ -1219,7 +1227,6 @@ End
 Public Sub ColorButtonLineas_Change()
 
   colorActual = ColorButtonLineas.value
-  ''NOTE: recordatorio...cambiar color del boton numerador
 
   If Settings["ReinicioContador", True] Then
     ContandorNumerador = 0
@@ -1307,6 +1314,9 @@ Public Sub ToolButtonFondo_Click()
 
   Dim c As String
   Dim datos As New Variant[]
+  Dim ancho, alto As Integer
+  Dim rutaimagen As String
+  Dim dimensiones, informacion As String
 
   FormFondo.setfondo(RutaImagenfondo)
   FormFondo.valores = datos
@@ -1321,7 +1331,7 @@ Public Sub ToolButtonFondo_Click()
     Select Case datos[1]
       Case "blanco"
         PictureBoxFondo.picture = Picture["blanco.png"]
-        RutaImagenfondo = "/tmp/blanco.png"
+        RutaImagenfondo = user.home & "/.config/pintascreen/blanco.png"
       Case "fondodinamico2pantallas"
         DibujaEfecto = "fondodinamico2pantallas"
 
@@ -1330,7 +1340,7 @@ Public Sub ToolButtonFondo_Click()
         PictureBoxFondo.picture = Picture["blanco.png"]
         incrementoh = DrawingArea1.h / (datos[2] + 1)
         SpinBoxR = datos[2]
-        RutaImagenfondo = "/tmp/blanco.png"
+        RutaImagenfondo = user.home & "/.config/pintascreen/blanco.png"
       Case "cuadricula"
         DibujaEfecto = "cuadricula"
         PictureBoxFondo.picture = Picture["blanco.png"]
@@ -1338,7 +1348,7 @@ Public Sub ToolButtonFondo_Click()
         SpinBoxHC = datos[3]
         incrementoh = DrawingArea1.h / (datos[2] + 1)
         incrementov = DrawingArea1.w / (datos[3] + 1)
-        RutaImagenfondo = "/tmp/blanco.png"
+        RutaImagenfondo = user.home & "/.config/pintascreen/blanco.png"
       Case "imagen"
         DibujaEfecto = ""
         'ajustar imagen al ancho y largo de la pantalla...
@@ -1346,18 +1356,91 @@ Public Sub ToolButtonFondo_Click()
           'no hacer nada, no se ha elegido ningun fichero
           Return
         Endif
-        Try Kill "/tmp/fondoelegido." & File.Ext(datos[2])
+        ''*****************************************************+
+        ''CARGAR IMAGEN Y ADAPTARLA A LA PANTALLA
+        ''*****************************************************+
 
-        Copy datos[2] To "/tmp/fondoelegido." & File.Ext(datos[2])
+        Try Kill user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2])
+
+        Copy datos[2] To user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2])
         Wait 0.05
-        c = "convert " & "/tmp/fondoelegido." & File.Ext(datos[2]) & " -resize " & Str$(screen.w) & "x" & Str$(screen.h) & "! /tmp/fondoelegido2." & File.Ext(datos[2])
-        ' Print "comando: ", c
-        Shell c Wait
-        PictureBoxFondo.Picture = Picture.Load("/tmp/fondoelegido2." & File.Ext(datos[2]))
-        RutaImagenfondo = "/tmp/fondoelegido2." & File.Ext(datos[2])
+
+        Select Case datos[3]
+          Case "Escalar"
+            ''caso 1º de adaptar imagen a extensión de pantalla, escanlando tanto vertical como horizontal
+            c = "convert " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " -resize " & Str$(screen.w) & "x" & Str$(screen.h) & "! /home/" & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
+            ' Print "comando: ", c
+            Shell c Wait
+
+          Case "SinEscalar"
+            'pongo un fondo gris y encima la imagen sin encalar en el centro.
+            CompruebaFondoGris()
+            c = "composite -gravity center " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " /home/" & user.home & "/.config/pintascreen/gristmp2.png" & " /home/" & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
+            Shell c Wait
+
+          Case "Horizontal"
+            'pongo un fondo gris y encima la imagen escalada que ocupe el ancho de la pantalla
+            CompruebaFondoGris()
+
+            rutaimagen = user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2])
+
+            Shell "identify " & rutaimagen To informacion
+
+            dimensiones = Split(informacion, " ")[2]
+            ancho = Val(Mid(dimensiones, 1, InStr(dimensiones, "x") - 1))
+
+            alto = Val(Mid(dimensiones, InStr(dimensiones, "x") + 1, Len(dimensiones)))
+
+            '1º convierto la imagen
+            c = "convert " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " -resize " & Str$(screen.w) & "x" & Str$(Int(screen.w / (ancho) * (alto))) & "! /home/" & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2])
+            Shell c Wait
+            '2º la pongo encima del fondo
+            c = "composite -gravity center " & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2]) & " /home/" & user.home & "/.config/pintascreen/gristmp2.png" & " /home/" & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
+            Shell c Wait
+
+          Case "Vertical"
+            'pongo un fondo gris y encima la imagen escalada que ocupe el alto de la pantalla
+            CompruebaFondoGris()
+            rutaimagen = user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2])
+            Shell "identify " & rutaimagen To informacion
+
+            dimensiones = Split(informacion, " ")[2]
+            ancho = Val(Mid(dimensiones, 1, InStr(dimensiones, "x") - 1))
+
+            alto = Val(Mid(dimensiones, InStr(dimensiones, "x") + 1, Len(dimensiones)))
+
+            '1º convierto la imagen
+            c = "convert " & user.home & "/.config/pintascreen/fondoelegido." & File.Ext(datos[2]) & " -resize " & Str$(Int(Screen.h * ancho / alto)) & "x" & Str$(Screen.h) & "! /home/" & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2])
+            Shell c Wait
+
+            '2º la pongo encima del fondo
+            c = "composite -gravity center " & user.home & "/.config/pintascreen/fondoelegido1tmp." & File.Ext(datos[2]) & " /home/" & user.home & "/.config/pintascreen/gristmp2.png" & " /home/" & user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
+            Shell c Wait
+
+        End Select
+
+        'Parte comun a los casos de imagenes de fondo
+        PictureBoxFondo.Picture = Picture.Load(user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2]))
+        RutaImagenfondo = user.home & "/.config/pintascreen/fondoelegido2." & File.Ext(datos[2])
     End Select
 
   Endif
+
+End
+
+Private Sub CompruebaFondoGris()
+
+  Dim c As String
+
+  If Not Exist(user.home & "/.config/pintascreen/gris2.png") Then
+    Try Copy "gris.png" To user.home & "/.config/pintascreen/gristmp.png"
+    Wait 0.05
+    c = "convert " & user.home & "/.config/pintascreen/gristmp.png" & " -resize " & Str$(screen.w) & "x" & Str$(screen.h) & "! /home/" & user.home & "/.config/pintascreen/gristmp2.png"
+    ' Print "comando: ", c
+    Shell c Wait
+  Endif
+
+  Return
 
 End
 
@@ -1494,13 +1577,13 @@ Public Sub ToolButtonFondoReloj_Click()
   Wend
   Me.Title = "pintaScreen"
   Wait 0.1
-  'Shell "DISPLAY=:0 scrot /tmp/$USER/fondo.jpg -q 100" Wait
-  'Shell "DISPLAY=:0 scrot /tmp/fondo.jpg -q 100" Wait
-  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save("/tmp/fondo.jpg", 100)
-  'PictureBoxFondo.Picture = Picture.Load("/tmp/" & User.Name & "/fondo.jpg")
-  PictureBoxFondo.Picture = Picture.Load("/tmp/fondo.jpg")
-  'RutaImagenfondo = "/tmp/" & User.Name & "/fondo.jpg"
-  RutaImagenfondo = "/tmp/fondo.jpg"
+  'Shell "DISPLAY=:0 scrot /home/" & user.home & "/.config/pintascreen/$USER/fondo.jpg -q 100" Wait
+  'Shell "DISPLAY=:0 scrot /home/" & user.home & "/.config/pintascreen/fondo.jpg -q 100" Wait
+  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save(user.home & "/.config/pintascreen/fondo.jpg", 100)
+  'PictureBoxFondo.Picture = Picture.Load( user.home & "/.config/pintascreen/" & User.Name & "/fondo.jpg")
+  PictureBoxFondo.Picture = Picture.Load(user.home & "/.config/pintascreen/fondo.jpg")
+  'RutaImagenfondo =  user.home & "/.config/pintascreen/" & User.Name & "/fondo.jpg"
+  RutaImagenfondo = user.home & "/.config/pintascreen/fondo.jpg"
   Wait 0.5
 
   ModuleSonido.SonidoCaptura()
@@ -1508,7 +1591,7 @@ Public Sub ToolButtonFondoReloj_Click()
   Me.Minimized = False
   Me.w = Screen.Width
   Me.h = Screen.H
-  'Me.Picture = Picture.Load("/tmp/" & User.Name & "/fondo.jpg")
+  'Me.Picture = Picture.Load( user.home & "/.config/pintascreen/" & User.Name & "/fondo.jpg")
 
   PictureBoxFondo.w = Screen.w
   PictureBoxFondo.h = Screen.h
@@ -1540,7 +1623,7 @@ Public Sub ToolButtonWebcam_Click()
       Message.Info(("Problemas para obtener la imagen de la camara web,") & gb.CrLf & (" pruebe con otra ruta de dispositivo /dev/video1, /dev/video2,"))
       Return
     Else
-      HBoxWebCam.visible = True ''NOTE: corregido 0.0.55: para que no muetre la ventanita
+      HBoxWebCam.visible = True
       TimerWebcam.Delay = RefrescoWebcam
       TimerWebcam.Start()
       ToolButtonWebcam.tag = "contenido"
@@ -1594,8 +1677,8 @@ End
 Public Sub Form_Activate()
 
   ' Print "toma captura..."
-  ' Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save("/tmp/fondo.jpg", 100)
-  ' Me.Picture = Picture.Load("/tmp/fondo.jpg")
+  ' Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save( user.home & "/.config/pintascreen/fondo.jpg", 100)
+  ' Me.Picture = Picture.Load( user.home & "/.config/pintascreen/fondo.jpg")
   ' 'borrado de pila de elementos...
   ' figuras.Clear()
 
@@ -1670,7 +1753,6 @@ Public Sub PictureBoxRedimensionaWebcam_Leave()
 End
 
 Public Sub ToolButtonPropiedades_Click()
-  'TODO: pendiente de hacer...propiedades... sacar cuadro...
 
   subirLosDemas()
   dibuja = "propiedades"
@@ -1682,7 +1764,7 @@ End
 
 Public Sub RefrescarDibujo()
 
-  PictureBoxFondo.Picture = Picture.Load("/tmp/fondo.jpg") 'cargo el nuevo fondo...
+  PictureBoxFondo.Picture = Picture.Load(user.home & "/.config/pintascreen/fondo.jpg") 'cargo el nuevo fondo...
 
   DrawingArea1.Refresh()
 

@@ -26,6 +26,7 @@ Public Sub form_Show()
   ValueBox1.value = informacion[1]
 
   ColorButton1.value = informacion[2]
+  TextBox1.SetFocus()
 
 End
 

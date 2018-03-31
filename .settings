@@ -55,6 +55,12 @@ Geometry=[149,101,210,210]
 [DebugWindow/Flechados]
 Geometry=[2,74,210,210]
 
+[DebugWindow/FrameTexto]
+Geometry=[180,288,562,578]
+
+[DebugWindow/FrameTexto.Children]
+Geometry=[194,302,562,578]
+
 [DebugWindow/HPanel(FMain.Children[1]).Children]
 Geometry=[163,115,210,210]
 
@@ -102,6 +108,9 @@ Geometry=[-3,26,210,210]
 
 [DebugWindow/Rectangulo]
 Geometry=[13,26,210,210]
+
+[DebugWindow/Screen]
+Geometry=[1280,0,224,280]
 
 [DebugWindow/ToolButtonChincheta]
 Geometry=[-3,26,562,696]
@@ -187,6 +196,21 @@ Geometry=[-3,26,210,210]
 [DebugWindow/image]
 Geometry=[-8,28,210,210]
 
+[DebugWindow/imagetmp]
+Geometry=[0,30,224,280]
+
+[DebugWindow/imagetmp.Image]
+Geometry=[14,44,224,280]
+
+[DebugWindow/imagetmp.Image.Picture]
+Geometry=[28,58,224,280]
+
+[DebugWindow/imagetmp.Image.Picture.Image]
+Geometry=[42,72,224,280]
+
+[DebugWindow/imagetmp.Image.Picture.Image.Picture]
+Geometry=[56,86,224,280]
+
 [DebugWindow/p]
 Geometry=[14,40,210,210]
 
@@ -213,19 +237,19 @@ Path="pintaScreen.gambas"
 
 [OpenFile]
 File[1]=".src/FMain.form"
-Active=34
-File[2]=".src/FMain.class:33.590"
+Active=44
+File[2]=".src/FMain.class:0.105"
 File[3]=".src/rectangulo.class:19.33"
 File[4]=".src/RectPunteado.class:19.0"
 File[5]=".src/elipse.class:51.47"
 File[6]=".src/flecha.class:3.79"
-File[7]=".src/ColorearTriangulo.class:0.6"
+File[7]=".src/ColorearTriangulo.class:21.27"
 File[8]=".src/Propiedades/FormCuadroPropiedades.form"
 File[9]=".src/Propiedades/FormCuadroPropiedades.class:22.109"
 File[10]=".src/Propiedades/ButtonBoxDobleTag.class:0.18"
 File[11]=".src/FormEditarTexto.form"
-File[12]=".src/FormEditarTexto.class:13.19"
-File[13]=".src/ModuleAbrirGuardar.module:8.81"
+File[12]=".src/FormEditarTexto.class:0.22"
+File[13]=".src/ModuleAbrirGuardar.module:170.50"
 File[14]=".src/linea.class:49.9"
 File[15]=".src/ManoAlzadaFlecha.class:19.0"
 File[16]=".src/ManoAlzada.class:0.20"
@@ -233,22 +257,32 @@ File[17]=".src/Mmain.module:4.2"
 File[18]=".src/FormAcercaDE.form"
 File[19]=".src/FormAcercaDE.class:23.42"
 File[20]=".src/Dibujo.class:8.0"
-File[21]=".src/Texto.class:25.36"
+File[21]=".src/Texto.class:38.42"
 File[22]=".src/Subrayador.class:19.0"
 File[23]=".src/Oscurece.class:94.33"
 File[24]=".src/Numerador.class:0.27"
-File[25]=".src/chincheta.class:0.5"
+File[25]=".src/chincheta.class:35.248"
 File[26]=".src/classUnitarias/_UnitTestLauncher.module:59.24"
 File[27]=".src/CapaGris.class:18.37"
-File[28]=".src/Aclara.class:0.29"
+File[28]=".src/Aclara.class:25.96"
 File[29]=".src/classUnitarias/UnitTestTask.class:33.8"
 File[30]=".src/EcuacionesRecta.module:0.0"
 File[31]=".src/fmensaje.form"
 File[32]=".src/fmensaje.class:6.0"
 File[33]=".src/FormAyuda.form"
-File[34]=".src/ModuleComun.module:20.176"
+File[34]=".src/ModuleComun.module:21.85"
 File[35]=".src/ModuleSonido.module:0.8"
-Count=35
+Count=45
+File[36]="modos/Modo_Vertical.png"
+File[37]="modos/Modo_Horizontal.png"
+File[38]="modos/ModoSinEscalar.png"
+File[39]="modos/modo_actual.png"
+File[40]=".src/FormColor.form"
+File[41]=".src/FormFondo.form"
+File[42]=".src/FormFondo.class:39.55"
+File[43]=".src/formularioAndando.form"
+File[44]=".src/TecladoVirtual.class:47.276"
+File[45]="README.md:90.2"
 
 [Watches]
 Count=1

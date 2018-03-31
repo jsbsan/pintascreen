@@ -26,6 +26,12 @@ Public Sub ButtonAceptar_Click()
     valores.Add(True)
     valores.Add("imagen")
     valores.Add(DrawingAreaPantalla.tag)
+
+    If RadioButtonModoActual.value Then valores.Add("Escalar")
+    If RadioButtonModoSinEscalar.value Then valores.Add("SinEscalar")
+    If RadioButtonModoHorizontal.value Then valores.Add("Horizontal")
+    If RadioButtonModoVertical.value Then valores.Add("Vertical")
+
   Else
     If RadioButtonRenglones.value = True Then
       valores.Add(True)
@@ -47,8 +53,8 @@ Public Sub ButtonAceptar_Click()
           If RadioButtonWebCam.value = True Then
             valores.Add(True)
             valores.Add("imagen")
-            Try hWebCam.Save("/tmp/webcam_shot.png")
-            valores.Add("/tmp/webcam_shot.png")
+            Try hWebCam.Save(user.home & "/.config/pintascreen/webcam_shot.png")
+            valores.Add(user.home & "/.config/pintascreen/webcam_shot.png")
           Else
             If RadioButtonFondoDinamico.value = True Then
               valores.Add(True)
@@ -242,5 +248,29 @@ Public Sub RadioButtonEnBlanco_Click()
   Timer1.Stop()
   dibuja = "fondoEnBlanco"
   DrawingAreaPantalla.Refresh()
+
+End
+
+Public Sub PictureBoxModoActual_MouseDown()
+
+  RadioButtonModoActual.value = True
+
+End
+
+Public Sub PictureBoxModoSinEscalar_MouseDown()
+
+  RadioButtonModoSinEscalar.value = True
+
+End
+
+Public Sub PictureBoxModoVertical_MouseDown()
+
+  RadioButtonModoVertical.value = True
+
+End
+
+Public Sub PictureBoxModoHorizontal_MouseDown()
+
+  RadioButtonModoHorizontal.value = True
 
 End

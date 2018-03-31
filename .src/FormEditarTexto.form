@@ -33,7 +33,6 @@
     MoveScaled(31,5,10,4)
   }
   { TextBox1 TextBox
-    MoveScaled(8,1,43,4)
-    Text = ("TextBox1")
+    MoveScaled(8,1,45,4)
   }
 }

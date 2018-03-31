@@ -83,17 +83,17 @@ Public Function coloreaTriangulo(valor As Integer) As Image
   Dim contenido As String
   Dim i As Image
 
-  Try Kill "/tmp/triangulo.svg"
-  Try Copy "triangulo.svg" To "/tmp/triangulo.svg"
-  contenido = File.Load("/tmp/triangulo.svg")
+  Try Kill user.home & "/.config/pintascreen/triangulo.svg"
+  Try Copy "triangulo.svg" To user.home & "/.config/pintascreen/triangulo.svg"
+  contenido = File.Load(user.home & "/.config/pintascreen/triangulo.svg")
 
   contenido = Replace(contenido, "fill:#ff0000;", "fill:#" & Hex(valor) & ";")
 
-  File.Save("/tmp/trianguloColoreado.svg", contenido)
-  Try Kill "/tmp/tri.png"
-  Shell "convert /tmp/trianguloColoreado.svg /tmp/tri.png" Wait
+  File.Save(user.home & "/.config/pintascreen/trianguloColoreado.svg", contenido)
+  Try Kill user.home & "/.config/pintascreen/tri.png"
+  Shell "convert /home/" & user.home & "/.config/pintascreen/trianguloColoreado.svg /home/" & user.home & "/.config/pintascreen/tri.png" Wait
 
-  i = Image.Load("/tmp/tri.png")
+  i = Image.Load(user.home & "/.config/pintascreen/tri.png")
   Return i
 
 End
@@ -107,8 +107,8 @@ Public Sub EmborronarTomarFotoParcial(x1 As Integer, y1 As Integer, x2 As Intege
   v.visible = False
   Wait 0.1
   'caputar
-  ' Shell "DISPLAY=:0 scrot /tmp/$USER/fondoCaptura.png -q 100" Wait
-  '   Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save("/tmp/fondo.jpg", 100)
+  ' Shell "DISPLAY=:0 scrot /home/" & user.home & "/.config/pintascreen/$USER/fondoCaptura.png -q 100" Wait
+  '   Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save( user.home & "/.config/pintascreen/fondo.jpg", 100)
   If x1 > x2 Then
     valor = x1
     x1 = x2
@@ -125,17 +125,17 @@ Public Sub EmborronarTomarFotoParcial(x1 As Integer, y1 As Integer, x2 As Intege
   p = Desktop.Screenshot(x1, y1, x2 - x1, y2 - y1)
   numeracion = Right$("00000" & Str$(Int(Rnd(0, 90000))), 5)
 
-  p.Save("/tmp/emborronarA" & numeracion & ".jpg")
+  p.Save(user.home & "/.config/pintascreen/emborronarA" & numeracion & ".jpg")
   'hago conversion...
   Wait 0.1
-  Shell "convert /tmp/emborronarA" & numeracion & ".jpg -blur 0x3 /tmp/emborronar" & numeracion & ".jpg"
-  While Not Exist("/tmp/emborronar" & numeracion & ".jpg")
+  Shell "convert /home/" & user.home & "/.config/pintascreen/emborronarA" & numeracion & ".jpg -blur 0x3 /home/" & user.home & "/.config/pintascreen/emborronar" & numeracion & ".jpg"
+  While Not Exist(user.home & "/.config/pintascreen/emborronar" & numeracion & ".jpg")
     Wait 0.1
     'esperar hasta que no se cree el archivo
   Wend
 
   v.visible = True
-  Return "/tmp/emborronar" & numeracion & ".jpg"
+  Return user.home & "/.config/pintascreen/emborronar" & numeracion & ".jpg"
 
 End
 
@@ -147,8 +147,8 @@ Public Sub TomarFotoParcial(x1 As Integer, y1 As Integer, x2 As Integer, y2 As I
   v.visible = False
   Wait 0.1
   'caputar
-  ' Shell "DISPLAY=:0 scrot /tmp/$USER/fondoCaptura.png -q 100" Wait
-  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save("/tmp/fondo.jpg", 100)
+  ' Shell "DISPLAY=:0 scrot /home/" & user.home & "/.config/pintascreen/$USER/fondoCaptura.png -q 100" Wait
+  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save(user.home & "/.config/pintascreen/fondo.jpg", 100)
 
   If x1 > x2 Then
     valor = x1

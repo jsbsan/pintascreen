@@ -41,15 +41,15 @@
       MoveScaled(6,4,6,6)
       ToolTip = ("grosor del trazo")
     }
-    { ToolButtonSelect ToggleButton
-      MoveScaled(6,10,6,6)
-      ToolTip = ("Seleccionar objetos para mover")
-      Picture = Picture["cursor.png"]
-    }
     { ToolButtonPropiedades ToggleButton
       MoveScaled(0,11,6,6)
       ToolTip = ("Propiedades del objeto")
       Picture = Picture["propiedades.png"]
+    }
+    { ToolButtonSelect ToggleButton
+      MoveScaled(6,10,6,6)
+      ToolTip = ("Seleccionar objetos para mover")
+      Picture = Picture["cursor.png"]
     }
     { ToolButtonPapelera ToolButton
       MoveScaled(6,12,6,6)
@@ -140,7 +140,7 @@
       Picture = Picture["camaraZona.png"]
     }
     { ToolButtonFondo ToolButton
-      MoveScaled(1,64,6,6)
+      MoveScaled(0,64,6,6)
       ToolTip = ("Cambiar Fondo")
       Picture = Picture["fondo.png"]
       Border = True
@@ -184,22 +184,19 @@
     }
   }
   { FrameTexto Frame
-    MoveScaled(4,52,52,10)
+    MoveScaled(1,39,52,11)
     Visible = False
     Background = &H007FFF&
-    Text = ("Escriba el texto....")
-    { TextBoxTexto TextBox
-      MoveScaled(1,6,50,4)
-    }
+    Text = ("Escriba el texto.") & "..."
     { ButtonTextoOK Button
-      MoveScaled(21,2,6,4)
+      MoveScaled(39,1,6,4)
       Picture = Picture["icon:/16/apply"]
     }
     { ColorButtonColorBotonTexto ColorButton
-      MoveScaled(5,2,6,4)
+      MoveScaled(21,1,6,4)
     }
     { ButtonTeclado Button
-      MoveScaled(13,2,7,4)
+      MoveScaled(30,1,7,4)
       Picture = Picture["control/teclado.jpg"]
     }
     { ToolButtonDesplazaTeclado ToolButton
@@ -207,9 +204,12 @@
       ToolTip = ("mover barra de texto")
       Picture = Picture["mover.png"]
     }
+    { TextBoxTexto TextBox
+      MoveScaled(1,6,50,4)
+    }
   }
   { HBoxWebCam Panel
-    MoveScaled(8,23,30,24)
+    MoveScaled(8,5.7143,30,24)
     Visible = False
     { PictureBoxWebCam PictureBox
       MoveScaled(0,3,30,21)

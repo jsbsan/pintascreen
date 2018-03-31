@@ -33,7 +33,6 @@ Public Sub _new(...)
 End
 
 Public Sub dibuja()
-  ''TODO: Si fuera .svg seria dibuja .svg...!!!
 
   ' Dim hsvgimage As SvgImage
   '
@@ -247,7 +246,7 @@ Public Sub guardar() As String
   contenido &= Str$(ptoDimension.y) & "|"
 
   'guardo la imagen en el directorio de trabajo
-  Try Copy imagenruta To "/tmp/pintascreenGuarda/" & File.Name(imagenruta)
+  Try Copy imagenruta To user.home & "/.config/pintascreen/pintascreenGuarda/" & File.Name(imagenruta)
   Return contenido
 
 End
@@ -256,7 +255,7 @@ Public Function abrir(Arraylinea As String[]) As Boolean
 
   If Arraylinea[1] = "chincheta" Then
     imagenruta = Arraylinea[2]
-    Me.icono("/tmp/pintascreenAbrir/" & imagenruta) 'comprobar realmente la ruta guardada....
+    Me.icono(user.home & "/.config/pintascreen/pintascreenAbrir/" & imagenruta) 'comprobar realmente la ruta guardada....
     mouseinicioX = Val(Arraylinea[3])
     mouseinicioY = Val(Arraylinea[4])
     ancho = Val(Arraylinea[5])

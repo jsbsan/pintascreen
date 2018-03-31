@@ -17,12 +17,12 @@ End
 Public Sub cargaImagen(Rutafichero As String) As Picture
 
   'leer el archivo, lo descomprime, y carga la vista minuatura...
-  Try Kill "/tmp/mini.jpg"
+  Try Kill user.home & "/.config/pintascreen/mini.jpg"
 
   Shell "cd /tmp;tar -zxvf \"" & Rutafichero & "\" mini.jpg" Wait
 
-  If Exist("/tmp/mini.jpg") Then
-    Return Picture.Load("/tmp/mini.jpg")
+  If Exist(user.home & "/.config/pintascreen/mini.jpg") Then
+    Return Picture.Load(user.home & "/.config/pintascreen/mini.jpg")
   Else
     Return Null
   Endif
@@ -37,27 +37,27 @@ Public Sub abrir(Rutafichero As String, listaDibujos As Dibujo[])
 
   'se abre el fichero
   'copiamos el archivo y lo descomprimimos
-  If Not Exist("/tmp/pintascreenAbrir") Then
-    Mkdir "/tmp/pintascreenAbrir"
+  If Not Exist(user.home & "/.config/pintascreen/pintascreenAbrir") Then
+    Mkdir user.home & "/.config/pintascreen/pintascreenAbrir"
   Endif
 
   'borrar archivos existentes
-  For Each nombrearchivo In Dir("/tmp/pintascreenAbrir", "*.*", GB.File).Sort()
-    Kill "/tmp/pintascreenAbrir/" & nombrearchivo
+  For Each nombrearchivo In Dir(user.home & "/.config/pintascreen/pintascreenAbrir", "*.*", GB.File).Sort()
+    Kill user.home & "/.config/pintascreen/pintascreenAbrir/" & nombrearchivo
   Next
 
   'copia el archivo y lo descomprime el archivo
-  Copy Rutafichero To "/tmp/pintascreenAbrir/" & File.Name(Rutafichero)
-  Shell "cd /tmp/pintascreenAbrir/;tar -zxvf \"/tmp/pintascreenAbrir/" & File.Name(Rutafichero) & "\"" Wait
+  Copy Rutafichero To user.home & "/.config/pintascreen/pintascreenAbrir/" & File.Name(Rutafichero)
+  Shell "cd " & user.home & "/.config/pintascreen/pintascreenAbrir/;tar -zxvf \"" & user.home & "/.config/pintascreen/pintascreenAbrir/" & File.Name(Rutafichero) & " \"" Wait
 
   'copiar fondo
-  Try Kill "/tmp/fondo.jpg"
-  Move "/tmp/pintascreenAbrir/fondo.jpg" To "/tmp/fondo.jpg"
+  Try Kill user.home & "/.config/pintascreen/fondo.jpg"
+  Move user.home & "/.config/pintascreen/pintascreenAbrir/fondo.jpg" To user.home & "/.config/pintascreen/fondo.jpg"
 
   creaLista()
   listaDibujos.Clear()
   'se lee linea a linea
-  For Each linea In Split(File.Load("/tmp/pintascreenAbrir/figuras.txt"), "\n")
+  For Each linea In Split(File.Load(user.home & "/.config/pintascreen/pintascreenAbrir/figuras.txt"), "\n")
     arrayPalabras = Split(linea, "|", "\n")
     'se van creando los objetos tipo dibujo
     analisis(arrayPalabras, listaDibujos)
@@ -96,20 +96,20 @@ Public Sub guardar(rutafichero As String, listaDibujos As Dibujo[])
   Dim dtmp As Dibujo
   'crear una carpeta en el /tmp
 
-  If Not Exist("/tmp/pintascreenGuarda") Then
-    Mkdir "/tmp/pintascreenGuarda"
+  If Not Exist(user.home & "/.config/pintascreen/pintascreenGuarda") Then
+    Mkdir user.home & "/.config/pintascreen/pintascreenGuarda"
 
   Endif
 
-  'borrar archivo en "/tmp/pintascreenGuarda"
-  Try Kill "/tmp/pintascreenGuarda/fondo.jpg"
-  Try Kill "/tmp/pintascreenGuarda/mini.jpg"
-  Try Kill "/tmp/pintascreenGuarda/figuras.txt"
+  'borrar archivo en  user.home & "/.config/pintascreen/pintascreenGuarda"
+  Try Kill user.home & "/.config/pintascreen/pintascreenGuarda/fondo.jpg"
+  Try Kill user.home & "/.config/pintascreen/pintascreenGuarda/mini.jpg"
+  Try Kill user.home & "/.config/pintascreen/pintascreenGuarda/figuras.txt"
 
-  Copy "/tmp/fondo.jpg" To "/tmp/pintascreenGuarda/fondo.jpg"
+  Copy user.home & "/.config/pintascreen/fondo.jpg" To user.home & "/.config/pintascreen/pintascreenGuarda/fondo.jpg"
   '1º hacer una captura de baja calidad y pequeña
   'creo minuatura de la pantalla actual (ocultar barra y formulario)
-  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save("/tmp/pintascreenGuarda/mini.jpg", 0)
+  Desktop.Screenshot(0, 0, Screen.w, Screen.h).Save(user.home & "/.config/pintascreen/pintascreenGuarda/mini.jpg", 0)
 
   'creo archivo de texto con la informacion de las figuras...
   contenido = "Version|01\n"
@@ -118,18 +118,18 @@ Public Sub guardar(rutafichero As String, listaDibujos As Dibujo[])
   Next
 
   'guardar fichero en esa carpeta
-  File.Save("/tmp/pintascreenGuarda/figuras.txt", contenido)
+  File.Save(user.home & "/.config/pintascreen/pintascreenGuarda/figuras.txt", contenido)
   'crear el comprimido
   '
-  comando = "cd /tmp/pintascreenGuarda/;tar czvf \"" & File.Name(rutafichero) & ".tar.gz\" *"
+  comando = "cd /home/" & user.home & "/.config/pintascreen/pintascreenGuarda/;tar czvf \"" & File.Name(rutafichero) & ".tar.gz\" *"
 
   Shell comando Wait
-  comando = "mv /tmp/pintascreenGuarda/" & File.Name(rutafichero) & ".tar.gz " & Rutafichero & ".pintascreen"
+  comando = "mv /home/" & user.home & "/.config/pintascreen/pintascreenGuarda/" & File.Name(rutafichero) & ".tar.gz " & Rutafichero & ".pintascreen"
   Shell comando Wait
 
   'borrar todos los archivos del escritorio de trabajo...
-  For Each nombrearchivo In Dir("/tmp/pintascreenGuarda/", "*.*", GB.File).Sort()
-    Kill "/tmp/pintascreenGuarda/" & nombrearchivo
+  For Each nombrearchivo In Dir(user.home & "/.config/pintascreen/pintascreenGuarda/", "*.*", GB.File).Sort()
+    Kill user.home & "/.config/pintascreen/pintascreenGuarda/" & nombrearchivo
   Next
 
 End

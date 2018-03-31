@@ -36,7 +36,7 @@ Public Sub ptofinal(x As Integer, y As Integer)
   mousefinalY = y
   comprobarOrdenCoordenadas()
 
-  ' hImage = Image.Load("/tmp/" & User.Name & "/fondo.jpg")
+  ' hImage = Image.Load(  & user.home & "/.config/pintascreen/" & User.Name & "/fondo.jpg")
   puntofin = True
 
 End
@@ -66,7 +66,7 @@ End
 Public Sub setImagen(imagen As Image)
 
   hImage = imagen
-  'ruta: el valor es el mismo al fichero /tmp/fondo.jpg
+  'ruta: el valor es el mismo al fichero /home/" & user.home & "/.config/pintascreen/fondo.jpg
 
 End
 
@@ -94,7 +94,7 @@ Public Function abrir(Arraylinea As String[]) As Boolean
     mousefinalX = Val(Arraylinea[4])
     mousefinalY = Val(Arraylinea[5])
     puntofin = Val(Arraylinea[6])
-    hImage = Image.Load("/tmp/fondo.jpg")
+    hImage = Image.Load(user.home & "/.config/pintascreen/fondo.jpg")
     Return True
   Else
     Return False

@@ -37,7 +37,11 @@ Public Sub dibuja()
   Paint.Font.Bold = False
 
   Paint.MoveTo(mouseinicioX, mouseinicioY)
-  Paint.Text(palabra)
+  ''TODO:Mejorar el sistema de escritura de texto rico
+  '  Paint.Text(palabra) ''texto normal
+
+  Paint.RichText(palabra) ''texto rico
+
   Paint.Brush = Paint.Color(colortexto)
   Paint.Fill(True)
   Paint.Brush = Paint.Color(0)
