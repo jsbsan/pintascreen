@@ -1,3 +1,6 @@
+* Sat Mar 31 2018 Julio Sanchez Berro <jusabejusabe@gmail.com> 0.0.76
+-cambio directorio de trabajo. En vez de el temporal trabajo en uno que sea del usuario dentro de directorio oculto config
+
 * Thu Dec 28 2017 Julio Sanchez Berro <jusabejusabe@gmail.com> 0.0.75
 - text Rich Text y poner imagen de fondo con varios modo de escala
 

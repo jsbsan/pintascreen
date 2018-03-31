@@ -102,7 +102,7 @@ Public Sub Form_Open()
     Try Mkdir user.home & "/.config"
     Wait 0.05
     Mkdir user.home & "/.config/pintascreen/"
-    Try 0.05 '
+    Wait 0.05
 
   Endif
 
