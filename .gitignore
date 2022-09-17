@@ -1,14 +1,4 @@
-#ignorar este directorio
-
-.gambas/*
-.gambas/
-
-#archivos temporales
-*~
-
-#archivo ejecutable .gambas
-*.gambas
-#---- Gambas files to ignore (v1)
+#---- Gambas files to ignore (v5)
 *.gambas
 .lock
 *~
@@ -20,4 +10,18 @@ vgcore.*
 .*.prof
 .lang/*.pot
 .gambas/*
+.settings
+.startup
+.list
+.info
 #----
+#ignorar este directorio
+
+.gambas/*
+.gambas/
+
+#archivos temporales
+*~
+
+#archivo ejecutable .gambas
+*.gambas

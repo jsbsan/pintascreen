@@ -2,13 +2,13 @@ Mmain
 pintaScreen
 0
 0
-0.0.77
+0.0.78
 
 gb.image
 gb.gui.qt
 gb.form
-gb.desktop.x11
 gb.desktop
+gb.desktop.x11
 gb.settings
 gb.net
 gb.net.curl

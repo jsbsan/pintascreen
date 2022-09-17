@@ -164,7 +164,7 @@ Private Function Ancho_X_Read() As Integer
   If an > 0 Then
     Return an
   Else
-    Return - an
+    Return -an
   Endif
 
 End
@@ -186,7 +186,7 @@ Private Function Alto_Y_Read() As Integer
   If al > 0 Then
     Return al
   Else
-    Return (- al)
+    Return (-al)
   Endif
 
 End

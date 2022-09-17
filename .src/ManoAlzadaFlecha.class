@@ -141,7 +141,7 @@ Public Sub calcularAngulosYGiro(x As Integer, y As Integer)
 
     'ESTO SE PUEDE HACER TAMBIÉN TOMANDO DIRECTAMENTE EL ÁNGULO
   Else If (mousefinalY - mouseestuvoY < 0) And (mousefinalX - mouseestuvoX > 0) Then 'CUADRANTE 1
-    angulo = Deg(ATan((- mousefinalY + mouseestuvoY) / (mousefinalX - mouseestuvoX)))
+    angulo = Deg(ATan((-mousefinalY + mouseestuvoY) / (mousefinalX - mouseestuvoX)))
     '  triangulo = Image.Load("triangulo.png")
     If (angulo > 85) And (angulo < 90) Then 'Pequeño ajuste por las peculiaridades del triángulo elegido
       mousefinalX = mousefinalX + 1
@@ -158,21 +158,21 @@ Public Sub calcularAngulosYGiro(x As Integer, y As Integer)
     giroY = mousefinalY - 25
 
   Else If (mousefinalY - mouseestuvoY < 0) And (mousefinalX - mouseestuvoX < 0) Then 'CUADRANTE 2
-    angulo = Deg(ATan((- mousefinalY + mouseestuvoY) / (mousefinalX - mouseestuvoX)))
+    angulo = Deg(ATan((-mousefinalY + mouseestuvoY) / (mousefinalX - mouseestuvoX)))
     angulo = angulo + 180
 
     giroX = mousefinalX - 25
     giroY = mousefinalY - 25
 
   Else If (mousefinalY - mouseestuvoY > 0) And (mousefinalX - mouseestuvoX < 0) Then 'CUADRANTE 3
-    angulo = Deg(ATan((- mousefinalY + mouseestuvoY) / (mousefinalX - mouseestuvoX)))
+    angulo = Deg(ATan((-mousefinalY + mouseestuvoY) / (mousefinalX - mouseestuvoX)))
     angulo = angulo + 180
 
     giroX = mousefinalX - 25
     giroY = mousefinalY - 25
 
   Else If (mousefinalY - mouseestuvoY > 0) And (mousefinalX - mouseestuvoX > 0) Then 'CUADRANTE 4
-    angulo = Deg(ATan((- mousefinalY + mouseestuvoY) / (mousefinalX - mouseestuvoX)))
+    angulo = Deg(ATan((-mousefinalY + mouseestuvoY) / (mousefinalX - mouseestuvoX)))
     giroX = mousefinalX - 25
     giroY = mousefinalY - 25
 
@@ -180,7 +180,7 @@ Public Sub calcularAngulosYGiro(x As Integer, y As Integer)
     'debug "división por cero"
 
   Else
-    angulo = Deg(ATan((- mousefinalY + mouseestuvoY) / (mousefinalX - mouseestuvoX)))
+    angulo = Deg(ATan((-mousefinalY + mouseestuvoY) / (mousefinalX - mouseestuvoX)))
   Endif
 
 End

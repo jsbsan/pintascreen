@@ -16,7 +16,7 @@ End
 
 Public Function pendienteEcuacionRecta(MiEcuacionRecta As EcuacionRecta) As Float
 
-  Return - (MiEcuacionRecta.A / miEcuacionRecta.B)
+  Return -(MiEcuacionRecta.A / miEcuacionRecta.B)
 
 End
 
@@ -25,8 +25,8 @@ Public Sub EcuacionGeneralDosPuntos(x1 As Float, y1 As Float, x2 As Float, y2 As
   Dim ecu As New EcuacionRecta
 
   ecu.A = y2 - y1
-  ecu.B = - (x2 - x1)
-  ecu.C = - (x1 * ecu.A - y1 * ecu.B)
+  ecu.B = -(x2 - x1)
+  ecu.C = -(x1 * ecu.A - y1 * ecu.B)
 
   Return ecu
 
@@ -51,7 +51,7 @@ Public Sub PtoFlecha1(Angulo As Integer, Dist As Integer, xinicial As Integer, y
 
   pfinal.x = dist * Cos(Rad(angulointerior)) + xfinal
 
-  pfinal.y = - dist * Sin(Rad(angulointerior)) + yfinal
+  pfinal.y = -dist * Sin(Rad(angulointerior)) + yfinal
 
   Return pfinal
 
@@ -70,7 +70,7 @@ Public Sub PtoFlecha2(Angulo As Integer, Dist As Integer, xinicial As Integer, y
 
   pfinal.x = dist * Cos(Rad(angulointerior)) + xfinal
 
-  pfinal.y = - dist * Sin(Rad(angulointerior)) + yfinal
+  pfinal.y = -dist * Sin(Rad(angulointerior)) + yfinal
 
   Return pfinal
 

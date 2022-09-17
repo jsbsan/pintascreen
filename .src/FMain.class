@@ -873,6 +873,7 @@ Public Sub DrawingArea1_Draw()
   'dibujar las figuras que tenemos guardas
   '-------------------------------------------------------
   For Each dibTmp In figuras
+ 
     Select Case dibuja
       Case "desplazaObjeto"
         dibTmp.ptoControl = True
@@ -1451,7 +1452,7 @@ Public Sub ButtonTextoOK_Click()
 
   colorActual = ColorButtonColorBotonTexto.value
   palabra = TextBoxTexto.text
-  text = New Texto(FrameTexto.tag[0], FrameTexto.Tag[1], palabra, colorActual, anchoActual + ModuleComun.IncrementoLetra)
+  text = New Texto(FrameTexto.tag[0], FrameTexto.Tag[1], palabra, colorActual, ValueBoxTamanoTexto.value)
   figuras.Add(text)
   TextBoxTexto.text = ""
   FrameTexto.visible = False

@@ -6,7 +6,7 @@ Private mouseinicioX As Integer
 Private mouseinicioY As Integer
 Private palabra As String
 Private colortexto As Integer = Color.RGB(128, 128, 255)
-Private tamano As Integer = 30
+Public tamano As Integer = 30
 
 Public Sub getX() As Integer
 
@@ -40,7 +40,7 @@ Public Sub dibuja()
   ''TODO:Mejorar el sistema de escritura de texto rico
   '  Paint.Text(palabra) ''texto normal
 
-  Paint.RichText(palabra) ''texto rico
+  Paint.RichText(palabra, mouseinicioX, mouseinicioY, 1000, 1000) ''texto rico
 
   Paint.Brush = Paint.Color(colortexto)
   Paint.Fill(True)
