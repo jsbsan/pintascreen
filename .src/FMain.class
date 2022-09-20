@@ -873,7 +873,7 @@ Public Sub DrawingArea1_Draw()
   'dibujar las figuras que tenemos guardas
   '-------------------------------------------------------
   For Each dibTmp In figuras
- 
+
     Select Case dibuja
       Case "desplazaObjeto"
         dibTmp.ptoControl = True

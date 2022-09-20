@@ -11,6 +11,21 @@ Private tamano As Integer = 30
 Property Diametro As Integer ''diametro del circulo
 Private hdiametro As Integer
 
+Property Color_Texto As Integer
+Private hcolordeltexto As Integer
+
+Private Function Color_Texto_Read() As Integer
+
+  Return hcolordeltexto
+
+End
+
+Private Function Color_Texto_Write(value As Integer)
+
+  hcolordeltexto = value
+
+End
+
 Private Function Diametro_Read() As Integer
 
   If hdiametro = 0 Then
@@ -55,6 +70,15 @@ Public Sub dibuja()
   Paint.Font.Size = tamano + 3
   Paint.Font.Bold = False
 
+  ' filo negro
+  Paint.Brush = Paint.Color(Color.Black)
+  Paint.Arc(mouseinicioX, mouseinicioY, Me.Diametro + 3)
+  Paint.Fill
+  'fondo blanco
+  Paint.Brush = Paint.Color(Color.white)
+  Paint.Arc(mouseinicioX, mouseinicioY, Me.Diametro + 1)
+  Paint.Fill
+  'fondo rojo
   Paint.Brush = Paint.Color(&H31000000 + hcolorCirculo) 'Color.RGB(255, 0.2 * 255, 0.2 * 255, 0.1 * 255))
   Paint.Arc(mouseinicioX, mouseinicioY, Me.Diametro)
   Paint.Fill
@@ -65,7 +89,7 @@ Public Sub dibuja()
   Endif
 
   Paint.Text(palabra)
-  Paint.Brush = Paint.Color(Color.Black)
+  Paint.Brush = Paint.Color(hcolordeltexto)
   Paint.Fill(True)
   Paint.Brush = Paint.Color(0)
   Paint.LineWidth = 0.1
@@ -119,7 +143,7 @@ Public Sub mostrarpropiedades()
 
   Dim pro As New FormCuadroPropiedades
 
-  pro.mostrar(Me, ["Diametro", "Color_Circulo|colorbutton", "Centro_X", "Centro_Y", "Numerador"])
+  pro.mostrar(Me, ["Diametro", "Color_Circulo|colorbutton", "Color_Texto|colorbutton", "Centro_X", "Centro_Y", "Numerador", "C"])
 
 End
 
